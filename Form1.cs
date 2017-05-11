@@ -35,37 +35,37 @@ namespace PiKanban
                 lstAG
             };
 
-            //var jira = new JiraClient(new JiraAccount() { User = "sergio.tomio", Password = "456123@Capivara", ServerUrl = "http://jira.senior.com.br" });
-            //var issuesProjeto = jira.GetIssuesByJql("project = SDE AND type in (Story, Bug) AND status != Done ORDER BY Rank ASC", 0, Int32.MaxValue, new[] { "key", "summary" });
+            var jira = new JiraClient(new JiraAccount() { User = "sergio.tomio", Password = "456123@Capivara", ServerUrl = "http://jira.senior.com.br" });
+            var issuesBacklog = jira.GetIssuesByJql("project = SDE AND type in (Story, Bug) AND status NOT IN (Done, Closed)  AND ((sprint not in openSprints() and sprint not in futureSprints()) or sprint IS EMPTY) ORDER BY RANK ASC", 0, Int32.MaxValue, new[] { "key", "summary" }).issues;
 
             //var issuesBacklog = issuesProjeto.issues
             //    .Where(issue => issue.fields.customfield_10004 == null ||
             //                    !issue.fields.customfield_10004.Any(sprint => sprint.Contains("completeDate=<null>")));
 
-            var issuesBacklog = new List<Issue>()
-            {
-                new Issue() { key = "SDE-123", fields = new Fields() { summary = "Teste" } },
-                new Issue() { key = "SDE-321", fields = new Fields() { summary = "Teste2" } },
-                new Issue() { key = "SDE-456", fields = new Fields() { summary = "Teste3" } },
-                new Issue() { key = "SDE-1", fields = new Fields() { summary = "Teste" } },
-                new Issue() { key = "SDE-2", fields = new Fields() { summary = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" } },
-                new Issue() { key = "SDE-3", fields = new Fields() { summary = "Teste3" } },
-                new Issue() { key = "SDE-5", fields = new Fields() { summary = "Teste" } },
-                new Issue() { key = "SDE-4", fields = new Fields() { summary = "Teste2" } },
-                new Issue() { key = "SDE-6", fields = new Fields() { summary = "Teste3" } },
-                new Issue() { key = "SDE-7", fields = new Fields() { summary = "Teste" } },
-                new Issue() { key = "SDE-8", fields = new Fields() { summary = "Teste2" } },
-                new Issue() { key = "SDE-9", fields = new Fields() { summary = "Teste3" } },
-                new Issue() { key = "SDE-87", fields = new Fields() { summary = "Teste" } },
-                new Issue() { key = "SDE-53", fields = new Fields() { summary = "Teste2" } },
-                new Issue() { key = "SDE-64", fields = new Fields() { summary = "Teste3" } },
-                new Issue() { key = "SDE-25", fields = new Fields() { summary = "Teste" } },
-                new Issue() { key = "SDE-333", fields = new Fields() { summary = "Teste2" } },
-                new Issue() { key = "SDE-477", fields = new Fields() { summary = "Teste3" } },
-                new Issue() { key = "SDE-864", fields = new Fields() { summary = "Teste" } },
-                new Issue() { key = "SDE-12356", fields = new Fields() { summary = "Teste2" } },
-                new Issue() { key = "SDE-7777", fields = new Fields() { summary = "Teste3" } },
-            };
+            //var issuesBacklog = new List<Issue>()
+            //{
+            //    new Issue() { key = "SDE-123", fields = new Fields() { summary = "Teste" } },
+            //    new Issue() { key = "SDE-321", fields = new Fields() { summary = "Teste2" } },
+            //    new Issue() { key = "SDE-456", fields = new Fields() { summary = "Teste3" } },
+            //    new Issue() { key = "SDE-1", fields = new Fields() { summary = "Teste" } },
+            //    new Issue() { key = "SDE-2", fields = new Fields() { summary = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" } },
+            //    new Issue() { key = "SDE-3", fields = new Fields() { summary = "Teste3" } },
+            //    new Issue() { key = "SDE-5", fields = new Fields() { summary = "Teste" } },
+            //    new Issue() { key = "SDE-4", fields = new Fields() { summary = "Teste2" } },
+            //    new Issue() { key = "SDE-6", fields = new Fields() { summary = "Teste3" } },
+            //    new Issue() { key = "SDE-7", fields = new Fields() { summary = "Teste" } },
+            //    new Issue() { key = "SDE-8", fields = new Fields() { summary = "Teste2" } },
+            //    new Issue() { key = "SDE-9", fields = new Fields() { summary = "Teste3" } },
+            //    new Issue() { key = "SDE-87", fields = new Fields() { summary = "Teste" } },
+            //    new Issue() { key = "SDE-53", fields = new Fields() { summary = "Teste2" } },
+            //    new Issue() { key = "SDE-64", fields = new Fields() { summary = "Teste3" } },
+            //    new Issue() { key = "SDE-25", fields = new Fields() { summary = "Teste" } },
+            //    new Issue() { key = "SDE-333", fields = new Fields() { summary = "Teste2" } },
+            //    new Issue() { key = "SDE-477", fields = new Fields() { summary = "Teste3" } },
+            //    new Issue() { key = "SDE-864", fields = new Fields() { summary = "Teste" } },
+            //    new Issue() { key = "SDE-12356", fields = new Fields() { summary = "Teste2" } },
+            //    new Issue() { key = "SDE-7777", fields = new Fields() { summary = "Teste3" } },
+            //};
 
             foreach (var issue in issuesBacklog)
             {
